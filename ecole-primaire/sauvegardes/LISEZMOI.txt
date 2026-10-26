@@ -1,0 +1,2 @@
+Les sauvegardes quotidiennes de la base (ecole_*.dump) et des fichiers (fichiers_*.tgz) arrivent dans ce dossier.
+Procédure de restauration : README.md, section 6.

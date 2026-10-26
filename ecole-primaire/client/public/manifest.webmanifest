@@ -1,0 +1,19 @@
+{
+  "name": "École Aboukacem Chebbi",
+  "short_name": "École",
+  "description": "Notes, devoirs, emploi du temps, paiements et messagerie de l'école primaire.",
+  "lang": "fr",
+  "dir": "ltr",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#F3F5F9",
+  "theme_color": "#1F3A93",
+  "categories": ["education"],
+  "icons": [
+    { "src": "/icones/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icones/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icones/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

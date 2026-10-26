@@ -1,0 +1,9 @@
+**/node_modules
+client/dist
+server/public
+server/uploads
+sauvegardes
+.env
+.git
+*.log
+**/.DS_Store

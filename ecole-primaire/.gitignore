@@ -1,0 +1,9 @@
+node_modules/
+client/dist/
+server/public/
+server/uploads/
+sauvegardes/*.dump
+sauvegardes/*.tgz
+.env
+*.log
+.DS_Store
