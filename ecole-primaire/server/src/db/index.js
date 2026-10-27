@@ -6,7 +6,7 @@ types.setTypeParser(1700, (v) => (v === null ? null : parseFloat(v)));
 types.setTypeParser(1082, (v) => v);
 types.setTypeParser(20, (v) => (v === null ? null : parseInt(v, 10)));
 
-const pool = new Pool({ connectionString: config.databaseUrl, max: 20 });
+const pool = new Pool({ connectionString: config.databaseUrl, max: 20, connectionTimeoutMillis: 10000 });
 
 pool.on('error', (err) => {
   console.error('[db] erreur inattendue sur une connexion inactive :', err.message);
@@ -21,11 +21,6 @@ async function un(text, params) {
   return r.rows[0] || null;
 }
 
-/**
- * Exécute fn dans une transaction. L'utilisateur connecté est transmis à PostgreSQL
- * (set_config) pour que le trigger de journalisation enregistre qui a fait quoi.
- * Les tâches ajoutées dans client.apresCommit (e-mails, push…) sont lancées après le COMMIT.
- */
 async function tx(req, fn) {
   const client = await pool.connect();
   client.apresCommit = [];
@@ -62,7 +57,8 @@ async function attendreBase(tentatives = 30) {
       await pool.query('SELECT 1');
       return;
     } catch (e) {
-      console.log(`[db] base de données indisponible (${i}/${tentatives}) : ${e.message}`);
+      const hote = (config.databaseUrl.match(/@([^/:?]+)/) || [])[1] || 'non défini';
+      console.log(`[db] base de données indisponible (${i}/${tentatives}) — hôte « ${hote} » : ${e.message || e.code || e.name}`);
       await new Promise((r) => setTimeout(r, 2000));
     }
   }
